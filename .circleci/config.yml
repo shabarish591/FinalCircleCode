@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: nikengp/node6:v0.2
+      - image: circleci/python:3.6.1
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -15,27 +15,25 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
       - run: npm install
 
       - run: npm run build
 
-      - run: zip -r ./build/local-build-api.zip ./api-lambda.js
+      - run: zip -r ./build/my-build.zip ./switchboard.py
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      # run tests!
-      - run: npm test
-
-      # Deploy
+      - run:
+          name: install dependencies
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install 
+        
+    
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
+    
+   # Deploy
       - run: pushd pipeline && terraform init && terraform apply && popd
+
 
