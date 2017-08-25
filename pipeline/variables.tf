@@ -1,5 +1,5 @@
 variable "region" {
-  default = "us-east-2"
+  default = "us-west-2"
 }
 
 data "aws_caller_identity" "current" {}
@@ -32,6 +32,6 @@ terraform {
   backend "s3" {
     bucket = "serverless-lambda-b"
     key    = "circle_demo"
-    region = "us-east-2"
+    region = "us-west-2"
   }
 }
