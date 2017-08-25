@@ -8,12 +8,12 @@ jobs:
     working_directory: ~/repo
     dependencies:
        pre:
-       - wget https://releases.hashicorp.com/terraform/0.10.0/terraform_0.10.0_linux_amd64.zip?_ga=2.240233731.1409573529.1502171270-1054727096.1502171270
-       - mkdir ~/terra_code
-       - cd ~/terra_code
-       - unzip  terraform_0.10.0_linux_amd64.zip?_ga=2.240233731.1409573529.1502171270-1054727096.1502171270
-       - export PATH=$PATH:~/terra_code/terraform
+       - wget https://releases.hashicorp.com/terraform/0.8.5/terraform_0.8.5_linux_386.zip
+       - unzip terraform_0.8.5_linux_386.zip
+       - mv terraform /usr/local/bin/
+       - exort PATH=$PATH:/usr/local/bin/
        - source ~/.bashrc
+       - terraform -v
 
     steps:
       - checkout
@@ -23,7 +23,8 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-            echo "export PATH=$PATH:~/terra_code/terraform" >> ~/.bash_profile
+            echo "export PATH=$PATH:/usr/local/bin/" >> ~/.bash_profile
+            terraform -v
             pushd pipeline && terraform init && terraform apply && popd
 
 
