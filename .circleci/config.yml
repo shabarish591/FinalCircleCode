@@ -12,6 +12,10 @@ jobs:
       # - image: circleci/mongo:3.4.4
 
     working_directory: ~/repo
+    dependencies:
+       pre:
+       - wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.3_linux_amd64.zip
+       - unzip terraform_0.6.3_linux_amd64.zip
 
     steps:
       - checkout
@@ -22,26 +26,17 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-curl https://releases.hashicorp.com/index.json | jq '{terraform}' | egrep "linux.*amd64" | sort --version-sort -r | head -1 | awk -F[\"] '{print $4}'
-
-cd
-mkdir packer
-mkdir terraform && cd $_
-
-# Download Terraform. URI: https://www.terraform.io/downloads.html
-echo "Downloading $terraform_url."
-curl -o terraform.zip $terraform_url
-# Unzip and install
-unzip terraform.zip
-
-
- export PATH=~/terraform/:$PATH        
+  
     
       - store_artifacts:
           path: test-reports
           destination: test-reports
     
-   # Deploy
-      - run: pushd pipeline && terraform init && terraform apply && popd
+  deployment:
+  production:
+    branch: master
+    commands:
+      - ./terraform apply terraform.plan
+      - ./terraform remote push
 
 
