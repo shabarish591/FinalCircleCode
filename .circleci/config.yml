@@ -2,23 +2,31 @@ version: 2
 jobs:
   build:
     docker:
-      - image: ubuntu:14.04
-      - image: python:3.6.0
-    
-    working_directory: ~/my-project
+      # specify the version you desire here
+      - image: circleci/python:3.6.1
+
+    working_directory: ~/repo
+    dependencies:
+       pre:
+       - wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.3_linux_amd64.zip
+       - unzip terraform_0.6.3_linux_amd64.zip
 
     steps:
       - checkout
-    
-dependencies:
-  pre:
-    - wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.3_linux_amd64.zip
-    - unzip terraform_0.6.3_linux_amd64.zip
-   
-    
-      # Deploy staging
-      - deploy:
+
+      - run:
+          name: install dependencies
           command: |
-          - ./terraform apply terraform.plan
-          - ./terraform remote push     
-      
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+  
+    
+      - store_artifacts:
+          path: test-reports
+          destination: test-reports
+    
+      - run: 
+	    ./terraform apply terraform.plan
+      ./terraform remote push
+
