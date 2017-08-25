@@ -22,5 +22,8 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-            terraform apply terraform.plan
+            terraform init
+            terraform apply 
             terraform remote push
+
+
