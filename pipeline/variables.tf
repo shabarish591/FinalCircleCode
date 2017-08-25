@@ -12,6 +12,10 @@ variable "stage" {
   default = "dev"
 }
 
+variable "lambda_file" {
+  default = "lambda-build.zip"
+}
+
 variable "lambda_name" {
   default = "_airflow_request"
 }
@@ -21,13 +25,13 @@ variable "api_gateway_name" {
 }
 
 variable "role_name" {
-  default = "SampleCircleRole"
+  default = "support-circle-ci"
 }
 
 terraform {
   backend "s3" {
     bucket = "serverless-lambda-b"
     key    = "circle_demo"
-    region = "us-west-2"
+    region = "us-east-2"
   }
 }
