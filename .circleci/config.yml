@@ -32,11 +32,10 @@ jobs:
           path: test-reports
           destination: test-reports
     
-  deployment:
-  production:
-    branch: master
-    commands:
-      - ./terraform apply terraform.plan
-      - ./terraform remote push
+  - deploy: 
+          name: Deploy + Publish
+          command: 
+         - ./terraform apply terraform.plan
+         - ./terraform remote push
 
 
