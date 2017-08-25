@@ -8,5 +8,5 @@ resource "aws_lambda_function" "api_lambda_function" {
   memory_size = 128
   role = "${aws_iam_role.lambda_execution_role.arn}"
   runtime = "python3.6.0"
-  source_code_hash = "${base64sha256(Lambda-build.zip)}"
+  source_code_hash = "${base64sha256(file("Lambda-build.zip"))}"
 }
