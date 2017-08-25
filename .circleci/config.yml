@@ -11,7 +11,7 @@ jobs:
        - wget https://releases.hashicorp.com/terraform/0.8.5/terraform_0.8.5_linux_386.zip
        - unzip terraform_0.8.5_linux_386.zip
        - mv terraform /usr/local/bin/
-       - exort PATH=$PATH:/usr/local/bin/
+       - export PATH=$PATH:/usr/local/bin/
        - source ~/.bashrc
        - terraform -v
 
@@ -23,6 +23,12 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
+            wget https://releases.hashicorp.com/terraform/0.8.5/terraform_0.8.5_linux_386.zip
+            unzip terraform_0.8.5_linux_386.zip
+            mv terraform /usr/local/bin/
+            export PATH=$PATH:/usr/local/bin/
+            source ~/.bashrc
+            terraform -v
             echo "export PATH=$PATH:/usr/local/bin/" >> ~/.bash_profile
             terraform -v
             pushd pipeline && terraform init && terraform apply && popd
