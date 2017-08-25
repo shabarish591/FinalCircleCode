@@ -10,7 +10,7 @@ jobs:
        pre:
        - wget https://releases.hashicorp.com/terraform/0.8.5/terraform_0.8.5_linux_386.zip
        - unzip terraform_0.8.5_linux_386.zip
-       - mv terraform /usr/local/bin/
+       - sudo mv terraform /usr/local/bin/
        - chmod 777 /usr/local/bin/
        - export PATH=$PATH:/usr/local/bin/
        - source ~/.bashrc
@@ -26,8 +26,8 @@ jobs:
             pip install -r requirements.txt
             wget https://releases.hashicorp.com/terraform/0.8.5/terraform_0.8.5_linux_386.zip
             unzip terraform_0.8.5_linux_386.zip
-            mv terraform /usr/local/bin/
-            chmod 777 /usr/local/bin/
+            sudo mv terraform /usr/local/bin/
+            sudo chmod 777 /usr/local/bin/
             export PATH=$PATH:/usr/local/bin/
             source ~/.bashrc
             terraform -v
