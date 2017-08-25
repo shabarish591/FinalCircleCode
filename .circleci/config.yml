@@ -1,37 +1,16 @@
-version: 2
-jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/python:3.6.1
-     
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+dependencies:
+  pre:
+    - wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.3_linux_amd64.zip
+    - unzip terraform_0.6.3_linux_amd64.zip
 
-    working_directory: ~/repo
-    dependencies:
-       pre:
-       - wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.3_linux_amd64.zip
-       - unzip terraform_0.6.3_linux_amd64.zip
+test:
+  override:
+    - ./terraform remote config -backend=S3 -backend-config="bucket=serverless-lambda-b" -backend-config="key=terraform.tfstate" -backend-config="region=us-east-2"
+    - ./terraform plan -out=terraform.plan
 
-    steps:
-      - checkout
-
-      - run:
-          name: install dependencies
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
-  
-    
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
-    
-     - run: ./terraform apply terraform.plan
-        ./terraform remote push
-
-
+deployment:
+  production:
+    branch: master
+    commands:
+      - ./terraform apply terraform.plan
+      - ./terraform remote push
