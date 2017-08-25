@@ -30,7 +30,7 @@ variable "role_name" {
   default = "support-circle-ci"
 }
 
-terraform {
+terraform remote config {
   backend "s3" {
     bucket = "serverless-lambda-b"
     key    = "circle_demo"
