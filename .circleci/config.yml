@@ -9,7 +9,10 @@ jobs:
     dependencies:
        pre:
        - wget https://dl.bintray.com/mitchellh/terraform/terraform_0.6.3_linux_amd64.zip
+        - mkdir terra_code
+        -cd terra_code
        - unzip terraform_0.6.3_linux_amd64.zip
+       - export PATH=$PATH:~/terraform
 
     steps:
       - checkout
