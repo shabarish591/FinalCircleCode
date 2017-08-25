@@ -15,7 +15,7 @@ variable "stage" {
 }
 
 variable "lambda_file" {
-  default = "../build/lambda-build.zip"
+  default = "lambda-build.zip"
 }
 
 variable "lambda_name" {
