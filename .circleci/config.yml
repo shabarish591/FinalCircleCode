@@ -32,7 +32,7 @@ jobs:
             source ~/.bashrc
             terraform -v
             echo "export PATH=$PATH:/usr/local/bin/" >> ~/.bash_profile
-            pushd pipeline && terraform init && terraform remote state -disable && terraform plan -refresh=false && terraform apply && popd
+            terraform init && terraform remote state -disable && terraform plan -refresh=false && terraform apply
 
 
             
