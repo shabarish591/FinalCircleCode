@@ -26,10 +26,6 @@ variable "api_gateway_name" {
   default = "MyCircleProxy"
 }
 
-variable "role_name" {
-  default = "support-circle-ci"
-}
-
 terraform remote config {
   backend "s3" {
     bucket = "serverless-lambda-b"
