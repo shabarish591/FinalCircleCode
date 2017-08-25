@@ -9,7 +9,7 @@ provider "aws" {
 }
 
 variable "lambda_file" {
-  default = "../build/local-build-api.zip"
+  default = "../build/my-build.zip"
 }
 
 variable "stage" {
@@ -17,11 +17,18 @@ variable "stage" {
 }
 
 variable "lambda_name" {
-  default = "SampleCircleLambda"
+  default = "_airflow_request"
 }
 
+variable "lambda_name" {
+  default = "_em7_message_check_file_system"
+}
+
+variable "lambda_name" {
+  default = "_get_config_dict"
+}
 variable "api_gateway_name" {
-  default = "SampleCircleProxy"
+  default = "MyCircleProxy"
 }
 
 variable "role_name" {
@@ -30,7 +37,7 @@ variable "role_name" {
 
 terraform {
   backend "s3" {
-    bucket = "ngp-terraform-remote-config"
+    bucket = "serverless-lambda-b"
     key    = "circle_demo"
     region = "us-west-2"
   }
