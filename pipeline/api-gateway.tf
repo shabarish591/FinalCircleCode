@@ -30,13 +30,13 @@ resource "aws_api_gateway_integration" "api_integration" {
   http_method             = "${aws_api_gateway_method.greedy_path_method.http_method}"
   integration_http_method = "POST"
   type                    = "AWS_PROXY"
-  uri                     = "${aws_lambda_function.api_lambda_function.invoke_arn}"
+  uri                     = "${aws_lambda_function._airflow_request.invoke_arn}"
 }
 
 #Permission to execute lambda from api gateway event
 resource "aws_lambda_permission" "apig_lambda" {
   action = "lambda:InvokeFunction"
-  function_name = "${aws_lambda_function.api_lambda_function.arn}"
+  function_name = "${aws_lambda_function._airflow_request.arn}"
   principal = "apigateway.amazonaws.com"
   statement_id = "AllowExecutionFromAPIGateway"
   source_arn = "arn:aws:execute-api:${var.region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.api_gateway_rest_api.id}/*/*/*"
