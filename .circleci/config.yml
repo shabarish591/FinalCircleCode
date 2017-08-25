@@ -23,10 +23,9 @@ jobs:
             . venv/bin/activate
             pip install -r requirements.txt
             echo "export PATH=$PATH:~/terra_code/terraform" >> ~/.bash_profile
-            terraform init
-            terraform plan
-            terraform apply 
-            terraform remote push
+            pushd pipeline && terraform init && terraform apply && popd
+
+
             
             
 
