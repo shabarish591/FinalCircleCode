@@ -8,10 +8,6 @@ provider "aws" {
   region = "${var.region}"
 }
 
-variable "lambda_file" {
-  default = "Lambda-build.zip"
-}
-
 variable "stage" {
   default = "dev"
 }
