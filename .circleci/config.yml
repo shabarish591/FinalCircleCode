@@ -31,7 +31,7 @@ jobs:
           path: test-reports
           destination: test-reports
     
- - run: ./terraform apply terraform.plan
+     - run: ./terraform apply terraform.plan
         ./terraform remote push
 
 
