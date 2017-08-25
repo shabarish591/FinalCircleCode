@@ -4,6 +4,16 @@ variable "region" {
 
 data "aws_caller_identity" "current" {}
 
+data "terraform_remote_state" "aws_account" {
+  backend = "s3"
+  config {
+  bucket = "serverless-lambda-b"
+  key = "circle_demo"
+  region = "us-west-2"
+  profile = "support-circle-ci"
+  }
+}
+
 provider "aws" {
   region = "${var.region}"
   access_key = "AKIAJLLVUAZ6XKN3OFGA"
