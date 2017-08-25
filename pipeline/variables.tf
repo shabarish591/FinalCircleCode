@@ -30,9 +30,6 @@ variable "role_name" {
   default = "support-circle-ci"
 }
 
-variable "AWS_ACCESS_KEY_ID" {}
-variable "AWS_SECRET_ACCESS_KEY" {}
-
 terraform {
   backend "s3" {
     bucket = "serverless-lambda-b"
