@@ -1,7 +1,6 @@
 
 #Role the lambda will be executed with.
 resource "aws_iam_role" "lambda_execution_role" {
-  name = "${var.role_name}"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
