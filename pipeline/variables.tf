@@ -6,6 +6,8 @@ data "aws_caller_identity" "current" {}
 
 provider "aws" {
   region = "${var.region}"
+  access_key = "AKIAJLLVUAZ6XKN3OFGA"
+  secret_key = "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"
 }
 
 variable "stage" {
@@ -27,6 +29,9 @@ variable "api_gateway_name" {
 variable "role_name" {
   default = "support-circle-ci"
 }
+
+variable "AWS_ACCESS_KEY_ID" {}
+variable "AWS_SECRET_ACCESS_KEY" {}
 
 terraform {
   backend "s3" {
