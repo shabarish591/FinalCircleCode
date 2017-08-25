@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
+      # specify the version you desire here...
       - image: circleci/python:3.6.1
 
     working_directory: ~/repo
@@ -16,7 +16,7 @@ jobs:
        - source ~/.bashrc
        - terraform -v
 
-    steps:
+  steps:
       - checkout
       - run:
           name: install dependencies
