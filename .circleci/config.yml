@@ -9,7 +9,6 @@ jobs:
 
     steps:
       - checkout
-
       - run: command: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
 
 dependencies:
