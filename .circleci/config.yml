@@ -6,16 +6,7 @@ jobs:
       - image: circleci/python:3.6.1
 
     working_directory: ~/repo
-    dependencies:
-       pre:
-       - wget https://releases.hashicorp.com/terraform/0.10.2/terraform_0.10.2_linux_386.zip
-       - unzip terraform_0.10.2_linux_386.zip
-       - sudo mv terraform /usr/local/bin/
-       - chmod 777 /usr/local/bin/
-       - export PATH=$PATH:/usr/local/bin/
-       - source ~/.bashrc
-       - terraform -v
-
+    
     steps:
       - checkout
       - run:
@@ -32,7 +23,8 @@ jobs:
             source ~/.bashrc
             terraform -v
             echo "export PATH=$PATH:/usr/local/bin/" >> ~/.bash_profile
-            pushd pipeline && terraform init && terraform plan -refresh=false && terraform apply && popd
+            zip -r ./pipeline/lambda.zip ./switchboard.py
+            pushd pipeline && terraform init && terraform apply && popd
 
 
 
