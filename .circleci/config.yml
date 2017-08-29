@@ -24,18 +24,10 @@ jobs:
             terraform -v
             echo "export PATH=$PATH:/usr/local/bin/" >> ~/.bash_profile
             zip -r ./pipeline/lambda.zip ./switchboard.py
-            pushd pipeline && terraform init && terraform apply && popd
-workflows:
-  version: 2
-  build:
-    jobs:
-      - build
-      - deploy:
-          requires:
-              - build
-          filters:
-              branches:
-                only: /^(master|staging)$/
+            #sudo chmod u+x aws_inst.sh
+            #sudo ./aws_inst.sh
+            pushd pipeline && terraform init && terraform plan && terraform apply && popd
+
 
 
            
