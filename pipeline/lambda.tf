@@ -4,7 +4,7 @@ provider "aws" {
 
 resource "aws_lambda_function" "T_airflow_request" {
   filename = "${var.lambda_file}"
-  function_name = "Test_airflow_request"
+  function_name = "Test1_airflow_request"
   handler = "switchboard.handler"
   runtime = "python3.6"
   role = "${aws_iam_role.lambda_exec_role.arn}"
