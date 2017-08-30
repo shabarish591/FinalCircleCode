@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket   = "nike-lambda"
+    bucket   = "my-nike-lambda-bucket"
     key      = "nike-lambda-project/terraform.tfstate"
     region   = "us-east-2"
   }
