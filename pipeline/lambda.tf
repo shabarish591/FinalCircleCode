@@ -13,7 +13,7 @@ resource "aws_lambda_function" "T_airflow_request" {
 
 
 resource "aws_iam_role" "lambda_exec_role" {
-	 name = "lambda_exec_role"
+	 name = "my_lambda_exec_role"
  assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
